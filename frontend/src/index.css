@@ -179,3 +179,10 @@ body {
 .btn-neutral {
 	background-color: var(--neutral);
 }
+
+@media (max-width: 500px) {
+	.btn-logout {
+		padding: 0.25rem;
+		font-size: 0.75rem;
+	}
+}

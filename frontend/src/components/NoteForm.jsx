@@ -54,7 +54,7 @@ function NoteForm() {
 	};
 
 	return (
-		<form className='create' onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<h3>Add a New Note</h3>
 			<label>Note Title:</label>
 			<input

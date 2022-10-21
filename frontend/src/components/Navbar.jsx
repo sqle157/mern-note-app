@@ -17,7 +17,7 @@ function Navbar() {
 		<header>
 			<div className='container navbar'>
 				<Link to='/'>
-					<h1>SimpleNote</h1>
+					<h1 className='app-title'>SimpleNote</h1>
 				</Link>
 
 				<nav className='nav'>
