@@ -18,14 +18,11 @@ function Home() {
 	useEffect(() => {
 		setIsLoading(true);
 		const fetchNotes = async () => {
-			const response = await fetch(
-				`${process.env.REACT_APP_BACKEND_URI}/api/notes`,
-				{
-					headers: {
-						Authorization: `Bearer ${user.token}`,
-					},
-				}
-			);
+			const response = await fetch(`/api/notes`, {
+				headers: {
+					Authorization: `Bearer ${user.token}`,
+				},
+			});
 			const data = await response.json(); // parse json, return array of notes
 
 			if (response.ok) {
