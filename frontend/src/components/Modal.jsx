@@ -34,17 +34,14 @@ function Modal() {
 			status: newStatus,
 		};
 
-		const response = await fetch(
-			`${process.env.REACT_APP_BACKEND_URI}/api/notes/${note._id}`,
-			{
-				method: 'PATCH',
-				body: JSON.stringify(newNote),
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${user.token}`,
-				},
-			}
-		);
+		const response = await fetch(`/api/notes/${note._id}`, {
+			method: 'PATCH',
+			body: JSON.stringify(newNote),
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${user.token}`,
+			},
+		});
 
 		const data = await response.json();
 

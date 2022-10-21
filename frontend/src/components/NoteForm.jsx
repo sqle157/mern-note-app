@@ -24,17 +24,14 @@ function NoteForm() {
 
 		const note = { title, description, status };
 
-		const response = await fetch(
-			`${process.env.REACT_APP_BACKEND_URI}/api/notes`,
-			{
-				method: 'POST',
-				body: JSON.stringify(note),
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${user.token}`,
-				},
-			}
-		);
+		const response = await fetch(`/api/notes`, {
+			method: 'POST',
+			body: JSON.stringify(note),
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${user.token}`,
+			},
+		});
 
 		const data = await response.json();
 

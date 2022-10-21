@@ -16,15 +16,12 @@ function Note({ note }) {
 			return;
 		}
 
-		const response = await fetch(
-			`${process.env.REACT_APP_BACKEND_URI}/api/notes/${note._id}`,
-			{
-				method: 'DELETE',
-				headers: {
-					Authorization: `Bearer ${user.token}`,
-				},
-			}
-		);
+		const response = await fetch(`/api/notes/${note._id}`, {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${user.token}`,
+			},
+		});
 
 		const data = await response.json();
 

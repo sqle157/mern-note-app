@@ -12,16 +12,13 @@ export const useAuthRequest = () => {
 		setIsLoading(true);
 		setError(null);
 
-		const response = await fetch(
-			`${process.env.REACT_APP_BACKEND_URI}/api/users/${auth}`,
-			{
-				method: 'POST',
-				body: JSON.stringify({ email, password }),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		);
+		const response = await fetch(`/api/users/${auth}`, {
+			method: 'POST',
+			body: JSON.stringify({ email, password }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
 		const data = await response.json();
 
