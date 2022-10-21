@@ -9,22 +9,6 @@ const app = express();
 // middleware
 app.use(express.json()); // parse json data
 
-// handle CORS issue (not needed if deploy both ends on the same server)
-app.use((req, res, next) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-Width, Content-Type, Accept, Authorization'
-	);
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-
-	if (req.method === 'OPTIONS') {
-		return res.status(200).end();
-	}
-
-	next();
-});
-
 app.use((req, res, next) => {
 	console.log(req.path, req.method);
 	next();
