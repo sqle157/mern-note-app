@@ -1,0 +1,32 @@
+{
+	"name": "noteapp",
+	"version": "1.0.0",
+	"description": "A simple note web app where user can signup account and login and can also perform CRUD operation.",
+	"main": "index.js",
+	"scripts": {
+		"start": "node backend/server.js",
+		"server": "nodemon backend/server.js",
+		"client": "npm start --prefix frontend",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sqle157/mern-note-app.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/sqle157/mern-note-app/issues"
+	},
+	"homepage": "https://github.com/sqle157/mern-note-app#readme",
+	"dependencies": {
+		"bcrypt": "^5.1.0",
+		"concurrently": "^7.4.0",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.6.6",
+		"validator": "^13.7.0"
+	}
+}
