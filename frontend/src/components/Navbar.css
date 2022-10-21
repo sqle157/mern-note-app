@@ -1,0 +1,24 @@
+header {
+	background: #fff;
+}
+
+header a {
+	color: #333;
+	text-decoration: none;
+}
+
+.navbar {
+	padding: 0.625rem 1.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+}
+
+.nav :where(a, button) {
+	margin-left: 0.625rem;
+}

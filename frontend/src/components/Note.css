@@ -1,0 +1,39 @@
+.note-details {
+	background: #fff;
+	border-radius: 0.25rem;
+	margin: 1.25rem auto;
+	padding: 1.25rem;
+	position: relative;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.note-details h4 {
+	margin: 0 0 0.625rem 0;
+	font-size: 1.2rem;
+}
+
+.note-details p {
+	margin: 0;
+	font-size: 0.9rem;
+	color: #555;
+}
+
+.icon {
+	position: absolute;
+	display: grid;
+	place-items: center;
+	top: 1.25rem;
+	background: #f1f1f1;
+	padding: 0.375rem;
+	border-radius: 50%;
+	color: #333;
+	cursor: pointer;
+}
+
+.delete-icon {
+	right: 1.25rem;
+}
+
+.edit-icon {
+	right: 4rem;
+}

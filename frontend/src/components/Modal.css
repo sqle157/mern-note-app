@@ -1,0 +1,31 @@
+.overlay {
+	display: grid;
+	place-items: center;
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 10;
+}
+
+.modal {
+	width: min(600px, 100% - 3rem);
+	background-color: #fff;
+	margin: 0 auto;
+	padding: 1.25rem;
+}
+
+.modal h2 {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 1.25rem;
+}
+
+select {
+	display: block;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 0.25rem;
+	box-sizing: border-box;
+	padding: 0.25rem;
+	margin-bottom: 1.25rem;
+}
