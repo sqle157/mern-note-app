@@ -1,5 +1,6 @@
 .overlay {
 	display: grid;
+	display: -webkit-flex;
 	place-items: center;
 	position: fixed;
 	inset: 0;
