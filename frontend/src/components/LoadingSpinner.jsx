@@ -1,5 +1,5 @@
 import React from 'react';
-
+// CSS
 import './LoadingSpinner.css';
 
 const LoadingSpinner = (props) => {

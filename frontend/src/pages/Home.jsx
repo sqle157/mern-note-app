@@ -2,13 +2,12 @@ import { useEffect } from 'react';
 import { useNoteContext } from '../hooks/useNoteContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useFetch } from '../hooks/useFetch';
-// components
+// Components
 import Note from '../components/Note';
 import NoteForm from '../components/NoteForm';
 import Modal from '../components/Modal';
 import LoadingSpinner from '../components/LoadingSpinner';
-
-// css
+// CSS
 import './Home.css';
 
 function Home() {

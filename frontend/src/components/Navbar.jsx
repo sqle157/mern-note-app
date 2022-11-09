@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuthRequest } from '../hooks/useAuthRequest';
 import { useAuthContext } from '../hooks/useAuthContext';
-
-// css
+// CSS
 import './Navbar.css';
 
 function Navbar() {
