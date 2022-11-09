@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNoteContext } from '../hooks/useNoteContext';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useFetch } from '../hooks/useFetch';
 // components
 import Note from '../components/Note';
 import NoteForm from '../components/NoteForm';
@@ -12,30 +13,24 @@ import './Home.css';
 
 function Home() {
 	const { notes, edit_state, dispatch } = useNoteContext();
-	const [isLoading, setIsLoading] = useState(false);
+	const { isLoading, sendFetchRequest } = useFetch();
 	const { user } = useAuthContext();
 
 	useEffect(() => {
-		setIsLoading(true);
 		const fetchNotes = async () => {
-			const response = await fetch(`/api/notes`, {
-				headers: {
-					Authorization: `Bearer ${user.token}`,
-				},
+			const data = await sendFetchRequest('/api/notes', 'GET', null, {
+				Authorization: `Bearer ${user.token}`,
 			});
-			const data = await response.json(); // parse json, return array of notes
 
-			if (response.ok) {
+			if (data) {
 				dispatch({ type: 'SET_NOTES', payload: data });
 			}
-
-			setIsLoading(false);
 		};
 
 		if (user) {
 			fetchNotes();
 		}
-	}, [dispatch, user]);
+	}, [dispatch, sendFetchRequest, user]);
 
 	if (isLoading) {
 		return <LoadingSpinner asOverlay />;

@@ -1,53 +1,54 @@
 import { useState } from 'react';
 import { useNoteContext } from '../hooks/useNoteContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-
-// css
+import { useFetch } from '../hooks/useFetch';
+// CSS
 import './NoteForm.css';
 
 function NoteForm() {
 	const { dispatch } = useNoteContext();
 	const { user } = useAuthContext();
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
-	const [status, setStatus] = useState('');
-	const [error, setError] = useState(null);
-	const [emptyFields, setEmptyFields] = useState([]);
+	const [noteData, setNoteData] = useState({
+		title: '',
+		description: '',
+	});
+	const { error, emptyFields, sendFetchRequest } = useFetch();
+
+	const { title, description } = noteData;
+
+	const handleChange = (e) => {
+		const name = e.target.name;
+
+		setNoteData((prevData) => {
+			return {
+				...prevData,
+				[name]: e.target.value,
+			};
+		});
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!user) {
-			setError('You must be logged in!');
 			return;
 		}
 
-		const note = { title, description, status };
-
-		const response = await fetch(`/api/notes`, {
-			method: 'POST',
-			body: JSON.stringify(note),
-			headers: {
+		const data = await sendFetchRequest(
+			'/api/notes',
+			'POST',
+			JSON.stringify(noteData),
+			{
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${user.token}`,
-			},
-		});
+			}
+		);
 
-		const data = await response.json();
-
-		console.log(data);
-
-		if (!response.ok) {
-			setError(data.error);
-			setEmptyFields(data.emptyFields);
-		}
-
-		if (response.ok) {
-			setTitle('');
-			setDescription('');
-			setStatus('');
-			setError(null);
-			setEmptyFields([]);
+		if (data) {
+			setNoteData({
+				title: '',
+				description: '',
+			});
 			console.log('New note added', data);
 			dispatch({ type: 'CREATE_NOTE', payload: data });
 		}
@@ -59,7 +60,8 @@ function NoteForm() {
 			<label>Note Title:</label>
 			<input
 				type='text'
-				onChange={(e) => setTitle(e.target.value)}
+				name='title'
+				onChange={handleChange}
 				value={title}
 				className={emptyFields.includes('Title') ? 'error-input' : ''}
 			/>
@@ -67,7 +69,8 @@ function NoteForm() {
 			<label>Description:</label>
 			<textarea
 				type='text'
-				onChange={(e) => setDescription(e.target.value)}
+				name='description'
+				onChange={handleChange}
 				value={description}
 				className={emptyFields.includes('Description') ? 'error-input' : ''}
 			/>

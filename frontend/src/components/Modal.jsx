@@ -2,23 +2,38 @@ import { useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useNoteContext } from '../hooks/useNoteContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-
+import { useFetch } from '../hooks/useFetch';
+// CSS
 import './Modal.css';
 
 function Modal() {
 	const { note, dispatch } = useNoteContext();
 	const { user } = useAuthContext();
 	const ref = useRef(null);
-	const [newTitle, setNewTitle] = useState(note.title);
-	const [newDescription, setNewDescription] = useState(note.description);
-	const [newStatus, setNewStatus] = useState(note.status);
-	const [error, setError] = useState(null);
-	const [emptyFields, setEmptyFields] = useState([]);
+	const [newNoteData, setNewNoteData] = useState({
+		title: note.title,
+		description: note.description,
+		status: note.status,
+	});
+	const { error, emptyFields, sendFetchRequest } = useFetch();
+
+	const { title, description, status } = newNoteData;
 
 	const handleClickOverlay = (e) => {
 		if (e.target === ref.current) {
 			dispatch({ type: 'EDIT_STATE_TOGGLE' });
 		}
+	};
+
+	const handleChange = (e) => {
+		const name = e.target.name;
+
+		setNewNoteData((prevData) => {
+			return {
+				...prevData,
+				[name]: e.target.value,
+			};
+		});
 	};
 
 	const handleSubmit = async (e) => {
@@ -28,31 +43,17 @@ function Modal() {
 			return;
 		}
 
-		const newNote = {
-			title: newTitle,
-			description: newDescription,
-			status: newStatus,
-		};
-
-		const response = await fetch(`/api/notes/${note._id}`, {
-			method: 'PATCH',
-			body: JSON.stringify(newNote),
-			headers: {
+		const data = await sendFetchRequest(
+			`/api/notes/${note._id}`,
+			'PATCH',
+			JSON.stringify(newNoteData),
+			{
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${user.token}`,
-			},
-		});
+			}
+		);
 
-		const data = await response.json();
-
-		if (!response.ok) {
-			setError(data.error);
-			setEmptyFields(data.emptyFields);
-		}
-
-		if (response.ok) {
-			setError(null);
-			setEmptyFields([]);
+		if (data) {
 			console.log('New note updated', data);
 			dispatch({ type: 'EDIT_NOTE', payload: data });
 		}
@@ -70,22 +71,23 @@ function Modal() {
 					<label>Note Title:</label>
 					<input
 						type='text'
-						onChange={(e) => setNewTitle(e.target.value)}
-						value={newTitle}
+						name='title'
+						onChange={handleChange}
+						value={title}
 						className={emptyFields.includes('Title') ? 'error-input' : ''}
 					/>
 
 					<label>Description:</label>
 					<textarea
 						type='text'
-						onChange={(e) => setNewDescription(e.target.value)}
-						value={newDescription}
-						className={emptyFields.includes('Description') ? 'error-input' : ''}
-					/>
+						name='description'
+						onChange={handleChange}
+						value={description}
+						className={
+							emptyFields.includes('Description') ? 'error-input' : ''
+						}></textarea>
 
-					<select
-						value={newStatus}
-						onChange={(e) => setNewStatus(e.target.value)}>
+					<select value={status} name='status' onChange={handleChange}>
 						<option value='ACTION REQUIRED'>ACTION REQUIRED</option>
 						<option value='DONE'>DONE</option>
 					</select>

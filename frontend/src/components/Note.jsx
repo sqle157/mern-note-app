@@ -1,31 +1,33 @@
 import { useNoteContext } from '../hooks/useNoteContext';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useFetch } from '../hooks/useFetch';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+// Icons
 import { IconContext } from 'react-icons';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-
-// Css
+// CSS
 import './Note.css';
 
 function Note({ note }) {
 	const { dispatch } = useNoteContext();
 	const { user } = useAuthContext();
+	const { sendFetchRequest } = useFetch();
 
 	const handleDeleteClick = async () => {
 		if (!user) {
 			return;
 		}
 
-		const response = await fetch(`/api/notes/${note._id}`, {
-			method: 'DELETE',
-			headers: {
+		const data = await sendFetchRequest(
+			`/api/notes/${note._id}`,
+			'DELETE',
+			null,
+			{
 				Authorization: `Bearer ${user.token}`,
-			},
-		});
+			}
+		);
 
-		const data = await response.json();
-
-		if (response.ok) {
+		if (data) {
 			dispatch({ type: 'DELETE_NOTE', payload: data });
 		}
 	};

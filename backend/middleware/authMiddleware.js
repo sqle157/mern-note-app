@@ -2,14 +2,14 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 const requireAuth = async (req, res, next) => {
-	// very user is authenticated
+	// verify user is authenticated
 	const { authorization } = req.headers;
 
 	if (!authorization) {
 		return res.status(401).json({ error: 'Authorization token required' });
 	}
 
-	// get the token <= 'Bearer TOKEN'
+	// get the token == 'Bearer TOKEN'
 	const token = authorization.split(' ')[1];
 
 	try {
