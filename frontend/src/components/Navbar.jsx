@@ -8,6 +8,7 @@ function Navbar() {
 	const { logout } = useAuthRequest();
 	const { user } = useAuthContext();
 
+	// Handle logout event
 	const handleLogout = () => {
 		logout();
 	};

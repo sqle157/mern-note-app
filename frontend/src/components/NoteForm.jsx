@@ -16,6 +16,7 @@ function NoteForm() {
 
 	const { title, description } = noteData;
 
+	// Handle Input Change
 	const handleChange = (e) => {
 		const name = e.target.name;
 
@@ -27,6 +28,7 @@ function NoteForm() {
 		});
 	};
 
+	// Handle form submit
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -44,6 +46,7 @@ function NoteForm() {
 			}
 		);
 
+		// if no data, meaning there's an error
 		if (data) {
 			setNoteData({
 				title: '',

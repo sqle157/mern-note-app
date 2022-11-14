@@ -20,12 +20,14 @@ const getNotes = async (req, res) => {
 const getNote = async (req, res) => {
 	const { id } = req.params;
 
+	// check if the id is in correct format
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).json({ error: 'No such note' });
 	}
 
 	const note = await Note.findById(id);
 
+	// if there's no note
 	if (!note) {
 		return res.status(404).json({ error: 'No such note' });
 	}
@@ -40,6 +42,7 @@ const getNote = async (req, res) => {
 const createNote = async (req, res) => {
 	const { title, description } = req.body;
 
+	// handle empty fields validation
 	let emptyFields = [];
 
 	if (!title) {
@@ -72,12 +75,14 @@ const createNote = async (req, res) => {
 const deleteNote = async (req, res) => {
 	const { id } = req.params;
 
+	// check if the id is in correct format
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).json({ error: 'No such note' });
 	}
 
 	const note = await Note.findByIdAndDelete(id);
 
+	// If there's no note
 	if (!note) {
 		return res.status(404).json({ error: 'No such note' });
 	}
@@ -94,6 +99,7 @@ const updateNote = async (req, res) => {
 
 	const { title, description } = req.body;
 
+	// handle empty fields validation
 	let emptyFields = [];
 
 	if (!title) {
@@ -110,12 +116,14 @@ const updateNote = async (req, res) => {
 			.json({ error: 'Please fill in all the fields', emptyFields });
 	}
 
+	// check if the id is in correct format
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).json({ error: 'No such note' });
 	}
 
 	const note = await Note.findByIdAndUpdate(id, req.body, { new: true });
 
+	// if there's no note
 	if (!note) {
 		return res.status(404).json({ error: 'No such note' });
 	}

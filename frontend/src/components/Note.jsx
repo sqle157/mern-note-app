@@ -13,6 +13,7 @@ function Note({ note }) {
 	const { user } = useAuthContext();
 	const { sendFetchRequest } = useFetch();
 
+	// Handle delete
 	const handleDeleteClick = async () => {
 		if (!user) {
 			return;
@@ -32,6 +33,7 @@ function Note({ note }) {
 		}
 	};
 
+	// Handle toggle edit state
 	const handleEditClick = () => {
 		dispatch({ type: 'EDIT_STATE_TOGGLE', payload: note });
 	};
