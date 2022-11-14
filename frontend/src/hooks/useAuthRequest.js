@@ -2,16 +2,19 @@ import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 import { useNoteContext } from './useNoteContext';
 
+// Custom hook to handle the request of login/logout/signup
 export const useAuthRequest = () => {
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(null);
 	const { dispatch } = useAuthContext();
 	const { dispatch: noteDispatch } = useNoteContext();
 
+	// handle login request
 	const sendAuthRequest = async (email, password, auth) => {
 		setIsLoading(true);
 		setError(null);
 
+		// fetch the response
 		const response = await fetch(`/api/users/${auth}`, {
 			method: 'POST',
 			body: JSON.stringify({ email, password }),
@@ -20,6 +23,7 @@ export const useAuthRequest = () => {
 			},
 		});
 
+		// take the data
 		const data = await response.json();
 
 		if (!response.ok) {

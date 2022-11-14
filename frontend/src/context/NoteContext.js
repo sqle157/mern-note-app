@@ -6,14 +6,17 @@ export const notesReducer = (state, action) => {
 	switch (action.type) {
 		case 'SET_NOTES':
 			return {
+				// Set the notes
 				notes: action.payload,
 			};
 		case 'CREATE_NOTE':
 			return {
+				// Create new note
 				notes: [action.payload, ...state.notes],
 			};
 		case 'DELETE_NOTE':
 			return {
+				// Delete the note
 				notes: state.notes.filter((note) => note._id !== action.payload._id),
 			};
 		case 'EDIT_STATE_TOGGLE':
@@ -23,7 +26,9 @@ export const notesReducer = (state, action) => {
 				edit_state: !state.edit_state,
 			};
 		case 'EDIT_NOTE':
+			// update the note
 			const newNotes = state.notes.map((note) => {
+				// if note.id === payload.id
 				if (note._id === action.payload._id) {
 					note = { ...action.payload };
 

@@ -19,12 +19,14 @@ function Modal() {
 
 	const { title, description, status } = newNoteData;
 
+	// Handle click on the overlay
 	const handleClickOverlay = (e) => {
 		if (e.target === ref.current) {
 			dispatch({ type: 'EDIT_STATE_TOGGLE' });
 		}
 	};
 
+	// Handle input change
 	const handleChange = (e) => {
 		const name = e.target.name;
 
@@ -36,6 +38,7 @@ function Modal() {
 		});
 	};
 
+	// Handle form submit to update note
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -59,6 +62,7 @@ function Modal() {
 		}
 	};
 
+	// Handle cancel edit
 	const handleCancel = () => {
 		dispatch({ type: 'EDIT_STATE_TOGGLE' });
 	};
