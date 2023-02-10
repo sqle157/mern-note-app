@@ -40,9 +40,9 @@ function Note({ note }) {
 
 	return (
 		<div className='note-details'>
-			<h4 className={`${note.status === 'DONE' ? 'primary' : 'neutral'}`}>
+			<h2 className={`${note.status === 'DONE' ? 'primary' : 'neutral'}`}>
 				{note.title}
-			</h4>
+			</h2>
 			<p>
 				<strong>Description: </strong>
 				{note.description}

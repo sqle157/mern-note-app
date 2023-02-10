@@ -59,19 +59,21 @@ function NoteForm() {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Add a New Note</h3>
-			<label>Note Title:</label>
+			<h2>Add a New Note</h2>
+			<label htmlFor='title'>Note Title:</label>
 			<input
 				type='text'
+				id='title'
 				name='title'
 				onChange={handleChange}
 				value={title}
 				className={emptyFields.includes('Title') ? 'error-input' : ''}
 			/>
 
-			<label>Description:</label>
+			<label htmlFor='description'>Description:</label>
 			<textarea
 				type='text'
+				id='description'
 				name='description'
 				onChange={handleChange}
 				value={description}

@@ -72,18 +72,20 @@ function Modal() {
 			<div className='modal'>
 				<h2>Edit Note</h2>
 				<form className='create' onSubmit={handleSubmit}>
-					<label>Note Title:</label>
+					<label htmlFor='title'>Note Title:</label>
 					<input
 						type='text'
+						id='title'
 						name='title'
 						onChange={handleChange}
 						value={title}
 						className={emptyFields.includes('Title') ? 'error-input' : ''}
 					/>
 
-					<label>Description:</label>
+					<label htmlFor='description'>Description:</label>
 					<textarea
 						type='text'
+						id='description'
 						name='description'
 						onChange={handleChange}
 						value={description}

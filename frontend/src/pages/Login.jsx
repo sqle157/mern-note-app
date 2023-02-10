@@ -16,17 +16,19 @@ function Login() {
 
 	return (
 		<form className='auth-form' onSubmit={handleLogin}>
-			<h3>Log in</h3>
+			<h2>Log in</h2>
 
-			<label>Email: </label>
+			<label htmlFor='email'>Email: </label>
 			<input
+				id='email'
 				type='email'
 				onChange={(e) => setEmail(e.target.value)}
 				value={email}
 			/>
 
-			<label>Password: </label>
+			<label htmlFor='password'>Password: </label>
 			<input
+				id='password'
 				type='password'
 				onChange={(e) => setPassword(e.target.value)}
 				value={password}
