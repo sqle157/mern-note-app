@@ -2,7 +2,9 @@
 
 ![Preview for the Note Web App](./preview.png)
 
-A simple note web app where user can signup account and login and can also perform CRUD operation.
+A friendly note web app where you can sign up, log in, and easily manage your notes. 
+
+Create, view, update, and delete your notes hassle-free. Stay organized and never lose your ideas again!
 
 ## Features
 
